@@ -1,13 +1,6 @@
 #This is how include a config file
 include config.mk
 
-#Wildcard is an example of function
-TXT_FILES=$(wildcard books/*.txt)
-
-.PHONY: variables
-variables:
-	@echo TXT_FILES: $(TXT_FILES)
-
 # Generate summary table.
 results.txt : $(ZIPF_SRC) isles.dat abyss.dat last.dat 
 	$(ZIPF_EXE) *.dat > $@

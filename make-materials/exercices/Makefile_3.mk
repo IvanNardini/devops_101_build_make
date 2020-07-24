@@ -1,12 +1,14 @@
-#This is how include a config file
-include config.mk
+# VARIABLES
+# This is an example of Make variable (macro) (assignment)
+COUNT_SRC = countwords.py
+#To make things a bit more complex
+LANGUAGE = python
+#$(...) replace a variable with value ie a reference
+COUNT_EXE=$(LANGUAGE) $(COUNT_SRC)
 
-#Wildcard is an example of function
-TXT_FILES=$(wildcard books/*.txt)
-
-.PHONY: variables
-variables:
-	@echo TXT_FILES: $(TXT_FILES)
+#The same for testzipf.py and result.txt
+ZIPF_SRC = testzipf.py
+ZIPF_EXE = $(LANGUAGE) $(ZIPF_SRC)
 
 # Generate summary table.
 results.txt : $(ZIPF_SRC) isles.dat abyss.dat last.dat 

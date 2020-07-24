@@ -1,24 +1,14 @@
-#This is how include a config file
-include config.mk
-
-#Wildcard is an example of function
-TXT_FILES=$(wildcard books/*.txt)
-
-.PHONY: variables
-variables:
-	@echo TXT_FILES: $(TXT_FILES)
-
 # Generate summary table.
-results.txt : $(ZIPF_SRC) isles.dat abyss.dat last.dat 
-	$(ZIPF_EXE) *.dat > $@
+results.txt : testzipf.py isles.dat abyss.dat last.dat 
+	python $< *.dat > $@
 
 # Count words.
 .PHONY : dats
 dats : isles.dat abyss.dat last.dat
 # Target ---> Dependency
 # Create a pattern rule with % wildcard and stem $*
-%.dat : books/%.txt $(COUNT_SRC)
-		$(COUNT_EXE) $< $*.dat
+%.dat : books/%.txt countwords.py
+		python countwords.py $< $*.dat
 
 # In order to build a file named [something].dat (the target) 
 # find a file named books/[that same something].txt (the dependency) 
